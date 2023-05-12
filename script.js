@@ -5,6 +5,8 @@ function getComputerChoice() {
 }
 
 function playRound(playerGuess, computerGuess) {
+    
+
     let modifiedPlayerGuess = playerGuess.charAt(0).toUpperCase() + playerGuess.slice(1).toLowerCase();
 
     let a;
@@ -52,16 +54,32 @@ function playRound(playerGuess, computerGuess) {
 
     switch(a) {
         case 0: 
-        console.log("You lose!");
+        return "You lose!";
         break;
         case 1:
-        console.log("You win!");
+        return "You win!";
         break;
         case 2:
-        console.log("You draw!");
+        return "You draw!";
         break;
         case 3:
-        console.log("You typed a wrong guess");
+        return "You typed a wrong guess!";
         break;
     }
 }
+
+function showResult(playerGuess, computerGuess) {
+    let pRes = document.querySelector('.playerGuess');
+    let cRes = document.querySelector('.computerGuess');
+    pRes.textContent = `Your guess: ${playerGuess}`;
+    cRes.textContent = `Computer's guess: ${computerGuess}`;
+    document.querySelector('.result').textContent = playRound(playerGuess, computerGuess);
+}
+
+const btn = document.querySelectorAll("button");
+btn.forEach((e) => {
+    e.addEventListener('click', function() {
+        let guess = e.getAttribute('id');
+        showResult(guess, getComputerChoice());
+    })
+})
